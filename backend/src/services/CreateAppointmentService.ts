@@ -5,7 +5,7 @@ import AppointmentsRepository from './../repositories/AppointmentRepository';
 
 //continua sendo um DTO
 interface Request {
-  provider: string;
+  provider_id: string;
   date: Date;
 }
 
@@ -13,7 +13,7 @@ class CreateAppointmentService {
   //dependency inversion
 
   //retorna uma promise tipada Appointment
-  public async execute({ date, provider }: Request): Promise<Appointment> {
+  public async execute({ date, provider_id }: Request): Promise<Appointment> {
 
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
@@ -28,7 +28,7 @@ class CreateAppointmentService {
     }
 
     const appointment = appointmentsRepository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     });
 
