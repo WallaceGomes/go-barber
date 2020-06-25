@@ -3,9 +3,11 @@ import { startOfHour, parseISO, parse } from 'date-fns';
 import AppointmentsRepository from './../repositories/AppointmentRepository';
 import CreateAppointmentService from './../services/CreateAppointmentService';
 import { getCustomRepository } from 'typeorm';
+import ensureAuth from './../middlewares/ensureAuth';
 
 const appointmentsRouter = Router();
 
+appointmentsRouter.use(ensureAuth);
 
 //Retorna todos os agendamentos
 appointmentsRouter.get('/', async (request, response) => {
