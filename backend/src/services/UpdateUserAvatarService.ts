@@ -3,6 +3,7 @@ import User from './../models/User';
 import uploadConfig from '../config/upload';
 import path from 'path';
 import fs from 'fs';
+import AppError from '../errors/AppError';
 
 interface Request {
   user_id: string;
@@ -17,7 +18,7 @@ class UpdateUserAvatarService {
     const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new Error('User not authenticated');
+      throw new AppError('User not authenticated', 401);
     }
 
     //Se o usuário já possuir um avatar, deleta
