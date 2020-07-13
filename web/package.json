@@ -13,6 +13,7 @@
     "@types/styled-components": "^5.1.1",
     "@unform/core": "^2.1.3",
     "@unform/web": "^2.1.3",
+    "axios": "^0.19.2",
     "polished": "^3.6.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -23,6 +24,7 @@
     "yup": "^0.29.1"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/yup": "^0.29.3",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
