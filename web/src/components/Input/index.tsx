@@ -68,6 +68,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         defaultValue={defaultValue}
         {...rest}
       />
+      {error}
     </Container>
   );
 };
