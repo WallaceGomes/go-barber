@@ -37,6 +37,7 @@ import {
 */
 
 const SignIn: React.FC = () => {
+  //add keyboard listenner to hide and show create account button
   return (
     <>
       <KeyboardAvoidingView
@@ -73,12 +74,12 @@ const SignIn: React.FC = () => {
               <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
             </ForgotPassword>
           </Container>
+          <CreateAccountButton>
+            <Icon name="log-in" size={20} color="#ff9000" />
+            <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
+          </CreateAccountButton>
         </ScrollView>
       </KeyboardAvoidingView>
-      <CreateAccountButton>
-        <Icon name="log-in" size={20} color="#ff9000" />
-        <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-      </CreateAccountButton>
     </>
   );
 };
