@@ -7,6 +7,7 @@ import {
   View,
   Keyboard,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -36,7 +37,8 @@ import {
 */
 
 const SignUp: React.FC = () => {
-  //add keyboard listenner to hide and show create account button
+  const navigation = useNavigation();
+
   return (
     <>
       <KeyboardAvoidingView
@@ -66,7 +68,7 @@ const SignUp: React.FC = () => {
               Entrar
             </Button>
           </Container>
-          <BackToSignInButton>
+          <BackToSignInButton onPress={() => navigation.goBack()}>
             <Icon name="arrow-left" size={20} color="#fff" />
             <BackToSignInText>Voltar para login</BackToSignInText>
           </BackToSignInButton>

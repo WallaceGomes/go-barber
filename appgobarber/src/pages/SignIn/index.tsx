@@ -6,6 +6,7 @@ import {
   Platform,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -34,10 +35,13 @@ import {
   ScrollView é usado para abilitar o scroll na tela
   keyboardShouldPersistTaps > Comportamento do teclado quando tocar na parte de fora dele,
   handled > baseado no SO
+
+  //add keyboard listenner to hide and show create account button
 */
 
 const SignIn: React.FC = () => {
-  //add keyboard listenner to hide and show create account button
+  const navigation = useNavigation();
+
   return (
     <>
       <KeyboardAvoidingView
@@ -73,11 +77,11 @@ const SignIn: React.FC = () => {
             >
               <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
             </ForgotPassword>
+            <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
+              <Icon name="log-in" size={20} color="#ff9000" />
+              <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
+            </CreateAccountButton>
           </Container>
-          <CreateAccountButton>
-            <Icon name="log-in" size={20} color="#ff9000" />
-            <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-          </CreateAccountButton>
         </ScrollView>
       </KeyboardAvoidingView>
     </>
