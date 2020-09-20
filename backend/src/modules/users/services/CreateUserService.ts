@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-import User from './../models/User';
-import AppError from '../errors/AppError';
+import User from '../infra/typeorm/entities/User';
+import AppError from '../../../shared/errors/AppError';
 
 interface Request {
   name: string;
@@ -27,13 +27,12 @@ class CreateUserService {
       name,
       email,
       password: hashedPassword,
-    })
+    });
 
     await usersRepository.save(user);
 
     return user;
   }
-
 }
 
 export default CreateUserService;

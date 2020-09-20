@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import authConfig from '../config/auth';
-import AppError from '../errors/AppError';
+import authConfig from '../../../../config/auth';
+import AppError from '../../../errors/AppError';
 
 interface TokenPayload {
   iat: number;
@@ -12,7 +12,7 @@ interface TokenPayload {
 export default function ensureAuth(
   request: Request,
   response: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void {
   const authHeader = request.headers.authorization;
 
@@ -37,12 +37,10 @@ export default function ensureAuth(
     //agora toda rota que utilizar esse middleware terá esse id na request
     request.user = {
       id: sub,
-    }
+    };
 
     return next();
-
   } catch (err) {
     throw new AppError('Invalid JWT token', 401);
   }
-
 }

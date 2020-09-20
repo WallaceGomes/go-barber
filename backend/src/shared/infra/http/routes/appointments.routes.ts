@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { startOfHour, parseISO, parse } from 'date-fns';
-import AppointmentsRepository from './../repositories/AppointmentRepository';
-import CreateAppointmentService from './../services/CreateAppointmentService';
+import AppointmentsRepository from '../../../../modules/appointments/repositories/AppointmentRepository';
+import CreateAppointmentService from '../../../../modules/appointments/services/CreateAppointmentService';
 import { getCustomRepository } from 'typeorm';
-import ensureAuth from './../middlewares/ensureAuth';
+import ensureAuth from '../middlewares/ensureAuth';
 
 const appointmentsRouter = Router();
 
@@ -19,7 +19,6 @@ appointmentsRouter.get('/', async (request, response) => {
 
 //Marca um agendamento com o profissional
 appointmentsRouter.post('/', async (request, response) => {
-
   const { provider_id, date } = request.body;
 
   //recebe a data em string e salva no formato correto no início na hora
@@ -33,7 +32,6 @@ appointmentsRouter.post('/', async (request, response) => {
   });
 
   return response.json(appointment);
-
 });
 
 export default appointmentsRouter;
