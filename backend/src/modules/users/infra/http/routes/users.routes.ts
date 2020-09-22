@@ -1,9 +1,9 @@
 import { Router, response } from 'express';
-import CreateUserService from '../../../../modules/users/services/CreateUserService';
+import CreateUserService from '../../../services/CreateUserService';
 import ensureAuth from '../middlewares/ensureAuth';
 import multer from 'multer';
-import uploadConfig from '../../../../config/upload';
-import UpdateUserAvatarService from '../../../../modules/users/services/UpdateUserAvatarService';
+import uploadConfig from '../../../../../config/upload';
+import UpdateUserAvatarService from '../../../services/UpdateUserAvatarService';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
@@ -36,7 +36,8 @@ usersRouter.patch(
       avatarFilename: request.file.filename,
     });
 
-    delete user.password;
+    // delete user.password;
+    user.password = '';
     return response.json(user);
   },
 );

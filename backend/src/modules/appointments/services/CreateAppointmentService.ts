@@ -1,8 +1,8 @@
-import Appointment from './../models/Appointment';
+import Appointment from '../infra/typeorm/entities/Appointment';
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 import AppointmentsRepository from './../repositories/AppointmentRepository';
-import AppError from '../errors/AppError';
+import AppError from '../../../shared/errors/AppError';
 
 //continua sendo um DTO
 interface Request {
@@ -15,7 +15,6 @@ class CreateAppointmentService {
 
   //retorna uma promise tipada Appointment
   public async execute({ date, provider_id }: Request): Promise<Appointment> {
-
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
     const appointmentDate = startOfHour(date);
