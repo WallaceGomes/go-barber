@@ -1,20 +1,20 @@
-import { getRepository } from 'typeorm';
 import User from '../infra/typeorm/entities/User';
 import uploadConfig from '../../../config/upload';
 import path from 'path';
 import fs from 'fs';
 import AppError from '../../../shared/errors/AppError';
+import IUsersRepository from '../repositories/IUsersRepository';
 
-interface Request {
+interface IRequest {
   user_id: string;
   avatarFilename: string;
 }
 
 class UpdateUserAvatarService {
-  public async excecute({ user_id, avatarFilename }: Request): Promise<User> {
-    const usersRepository = getRepository(User);
+  constructor(private usersRepository: IUsersRepository) {}
 
-    const user = await usersRepository.findOne(user_id);
+  public async excecute({ user_id, avatarFilename }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findByID(user_id);
 
     if (!user) {
       throw new AppError('User not authenticated', 401);
@@ -36,7 +36,7 @@ class UpdateUserAvatarService {
 
     //a função save também serve para editar um model
     //veirica se já existe um id ? edita os dados : cria um novo
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }

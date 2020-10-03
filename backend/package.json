@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "start:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/routes/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "start": "ts-node-dev src/shared/infra/http/server.ts"
   },

@@ -1,6 +1,6 @@
-import Appointment from '../entities/Appointment';
 import { getRepository, Repository } from 'typeorm';
 
+import Appointment from '../entities/Appointment';
 import IAppointmentsRepository from '../../../repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '../../../dtos/ICreateAppointmentDTO';
 

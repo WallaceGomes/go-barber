@@ -8,8 +8,6 @@ const appointmentsRouter = Router();
 
 appointmentsRouter.use(ensureAuth);
 
-const appointmentsRepository = new AppointmentsRepository();
-
 //Retorna todos os agendamentos
 // appointmentsRouter.get('/', async (request, response) => {
 //   const appointments = await appointmentsRepository.find();
@@ -24,6 +22,7 @@ appointmentsRouter.post('/', async (request, response) => {
   //recebe a data em string e salva no formato correto no início na hora
   const parsedDate = parseISO(date);
 
+  const appointmentsRepository = new AppointmentsRepository();
   const createAppointment = new CreateAppointmentService(
     appointmentsRepository,
   );
