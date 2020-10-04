@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { startOfHour, parseISO, parse } from 'date-fns';
-import AppointmentsRepository from '../../typeorm/repositories/AppointmentRepository';
+import { container } from 'tsyringe';
 import CreateAppointmentService from '../../../services/CreateAppointmentService';
 import ensureAuth from '../../../../users/infra/http/middlewares/ensureAuth';
 
@@ -22,10 +22,7 @@ appointmentsRouter.post('/', async (request, response) => {
   //recebe a data em string e salva no formato correto no início na hora
   const parsedDate = parseISO(date);
 
-  const appointmentsRepository = new AppointmentsRepository();
-  const createAppointment = new CreateAppointmentService(
-    appointmentsRepository,
-  );
+  const createAppointment = container.resolve(CreateAppointmentService);
 
   const appointment = await createAppointment.execute({
     date: parsedDate,
