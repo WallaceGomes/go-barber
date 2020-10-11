@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4'
+import { uuid } from 'uuidv4';
 
 import User from '../../infra/typeorm/entities/User';
 import IUsersRepository from '../../repositories/IUsersRepository';
@@ -12,19 +12,15 @@ class FakeUsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async findByemail(email: string): Promise<User | undefined> {
-    const user = this.users.find(user => user.email === email)
-    return user;
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const findUser = this.users.find(user => user.email === email);
+    return findUser;
   }
 
-  public async create({
-    name,
-    email,
-    password,
-  }: ICreateUserDTO): Promise<User> {
+  public async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User();
 
-    Object.assign(user, { id: uuid() }, name, email, password);
+    Object.assign(user, { id: uuid() }, userData);
 
     this.users.push(user);
 
