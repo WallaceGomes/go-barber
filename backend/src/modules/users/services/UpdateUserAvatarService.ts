@@ -5,6 +5,7 @@ import User from '../infra/typeorm/entities/User';
 import uploadConfig from '../../../config/upload';
 import AppError from '../../../shared/errors/AppError';
 import IUsersRepository from '../repositories/IUsersRepository';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProviders';
 
 interface IRequest {
   user_id: string;
@@ -16,6 +17,9 @@ class UpdateUserAvatarService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async excecute({ user_id, avatarFilename }: IRequest): Promise<User> {
@@ -27,17 +31,12 @@ class UpdateUserAvatarService {
 
     //Se o usuário já possuir um avatar, deleta
     if (user.avatar) {
-      const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
-      //verifica se existe um arquivo no path passado
-      const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
-
-      //se existe apaga o arquivo
-      if (userAvatarFileExists) {
-        await fs.promises.unlink(userAvatarFilePath);
-      }
+      await this.storageProvider.deleteFile(user.avatar);
     }
 
-    user.avatar = avatarFilename;
+    const filename = await this.storageProvider.saveFile(avatarFilename);
+
+    user.avatar = filename;
 
     //a função save também serve para editar um model
     //veirica se já existe um id ? edita os dados : cria um novo

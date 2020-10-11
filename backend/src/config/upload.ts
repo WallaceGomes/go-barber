@@ -5,10 +5,10 @@ import crypto from 'crypto';
 const tempFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
 export default {
-  directory: tempFolder,
+  tempFolder: tempFolder,
+  uploadsFolder: path.resolve(tempFolder, 'uploads'),
 
   storage: multer.diskStorage({
-
     destination: tempFolder,
     filename(request, file, callback) {
       const fileHash = crypto.randomBytes(10).toString('hex');
